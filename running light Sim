@@ -1,0 +1,20 @@
+`timescale 1ns/1ps
+module tb_running_light();
+reg clk;
+reg Reset_n;
+wire[3:0] led;
+running_light running_light(    
+ .clk(clk),
+ .Reset_n(Reset_n),
+ .led(led)
+);
+initial clk=1;
+always #10 clk=!clk; 
+initial begin
+Reset_n = 0;  
+#201  
+Reset_n = 1; 
+#40000000;
+$stop;
+end
+endmodule
