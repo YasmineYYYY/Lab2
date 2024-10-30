@@ -1,0 +1,38 @@
+`timescale  1ns/1ns
+
+module tb_latch2;
+
+    reg in1; 
+    reg in2;
+	 reg in3;
+	 
+    wire out; 
+   
+    latch2 latch2_inst (
+        .in1(in1),
+        .in2(in2),
+        .in3(in3),
+        .out(out)
+    );
+	 initial begin
+	 in1=3'b000;
+	 in2=3'b000;
+	 in3=3'b000;
+	 
+    forever begin 
+            #10 in1 = {$random} % 2; 
+            #10 in2 = {$random} % 2; 
+				#10 in2 = {$random} % 2; 
+            
+        end
+		  
+ end
+ 
+    initial begin
+		  $timeformat(-9,0,"ns",6);
+        $monitor("@time %t: in1=%b in2=%b in3=%b out=%b", 
+                 $time,in1,in2,in3,out);
+	 end
+        
+
+endmodule
